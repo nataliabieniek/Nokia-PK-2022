@@ -24,6 +24,8 @@ private:
     IUeGui& gui;
     common::PhoneNumber phoneNumber;
     IUserEventsHandler* handler = nullptr;
+
+    void showSmsList();
 };
 
 }

@@ -11,6 +11,8 @@ public:
     ConnectedState(Context& context);
 
     void handleDisconnected() final;
+
+    void handleShowSmsList();
 };
 
 }

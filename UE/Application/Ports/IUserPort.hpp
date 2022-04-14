@@ -7,6 +7,7 @@ namespace ue
 class IUserEventsHandler
 {
 public:
+//    virtual void handleShowSmsList() = 0;
     virtual ~IUserEventsHandler() = default;
 };
 
