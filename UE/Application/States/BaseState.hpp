@@ -2,6 +2,7 @@
 #include "IEventsHandler.hpp"
 #include "Logger/PrefixedLogger.hpp"
 #include "Context.hpp"
+#include "Messages/PhoneNumber.hpp"
 
 namespace ue
 {
@@ -21,6 +22,10 @@ public:
     void handleAttachReject() override;
     void handleDisconnected() override;
 
+    void handleCallAccept(common::PhoneNumber from) override;
+    void handleCallDrop(common::PhoneNumber from) override;
+    void handleSendCallRequest(common::PhoneNumber from, common::PhoneNumber to) override;
+    void handleReceiveCallRequest(common::PhoneNumber from) override;
 protected:
     Context& context;
     common::PrefixedLogger logger;

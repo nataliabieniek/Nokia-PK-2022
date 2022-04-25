@@ -51,6 +51,11 @@ void BtsPort::handleMessage(BinaryMessage msg)
                 handler->handleAttachReject();
             break;
         }
+        case common::MessageId::CallRequest:
+        {
+            handler->handleSendCallRequest(from, to);
+            break;
+        }
         default:
             logger.logError("unknow message: ", msgId, ", from: ", from);
 
@@ -79,4 +84,14 @@ void BtsPort::handleDisconnected() {
     handler->handleDisconnected();
 }
 
+void BtsPort::sendCallRequest(common::PhoneNumber to) {
+    logger.logDebug("sendCallRequest: ", to);
+    common::OutgoingMessage msg{
+        common::MessageId::CallRequest,
+        phoneNumber,
+        to
+    };
+
+    transport.sendMessage(msg.getMessage());
+}
 }
