@@ -15,6 +15,7 @@ public:
     void start(IBtsEventsHandler& handler);
     void stop();
 
+
     void sendAttachRequest(common::BtsId) override;
     void sendCallRequest(common::PhoneNumber to) override;
 

@@ -13,6 +13,8 @@ public:
     void handleDisconnected() final;
 
     void handleCallRequest(common::PhoneNumber from);
+
+    void handleSendCallRequest(common::PhoneNumber to) final;
 };
 
 }

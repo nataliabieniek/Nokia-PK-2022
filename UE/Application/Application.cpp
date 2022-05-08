@@ -56,8 +56,8 @@ void Application::handleCallRequest(common::PhoneNumber from) {
     context.state->handleCallRequest(from);
 }
 
-void Application::handleSendCallRequest(common::PhoneNumber from, common::PhoneNumber to) {
-    context.state->handleSendCallRequest(from, to);
+void Application::handleSendCallRequest(common::PhoneNumber to) {
+    context.state->handleSendCallRequest(to);
 }
 
 void Application::handleReceiveCallRequest(common::PhoneNumber from) {

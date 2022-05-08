@@ -75,6 +75,10 @@ void UserPort::showDial()
 {
     IUeGui::IDialMode& dial = gui.setDialMode();
     gui.setAcceptCallback([this] {
+
+    });
+    gui.setRejectCallback([this] {
+        showConnected();
     });
 }
 

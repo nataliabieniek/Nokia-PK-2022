@@ -19,4 +19,10 @@ void ConnectedState::handleCallRequest(common::PhoneNumber from) {
     logger.logInfo("Received call request from ", from);
 }
 
+void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
+    using namespace std::chrono_literals;
+    context.timer.startTimer(60000ms);
+    context.bts.sendCallRequest(to);
+}
+
 }

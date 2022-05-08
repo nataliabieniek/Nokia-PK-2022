@@ -17,7 +17,7 @@ public:
     virtual void handleDisconnected() = 0;
 
     virtual void handleCallRequest(common::PhoneNumber) = 0;
-    virtual void handleSendCallRequest(common::PhoneNumber from, common::PhoneNumber to) = 0;
+
     virtual void handleReceiveCallRequest(common::PhoneNumber from) = 0;
     virtual void handleCallAccept(common::PhoneNumber) = 0;
     virtual void handleCallDrop(common::PhoneNumber) = 0;

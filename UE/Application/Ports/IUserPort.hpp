@@ -10,6 +10,8 @@ class IUserEventsHandler
 {
 public:
     virtual ~IUserEventsHandler() = default;
+
+    virtual void handleSendCallRequest(common::PhoneNumber to) = 0;
 };
 
 class IUserPort
