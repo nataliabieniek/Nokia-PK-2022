@@ -51,6 +51,11 @@ void Application::handleDisconnected()
     context.state->handleDisconnected();
 }
 
+void Application::handleCallRequest(common::PhoneNumber from) {
+    logger.logInfo("Handling call request");
+    context.state->handleCallRequest(from);
+}
+
 void Application::handleSendCallRequest(common::PhoneNumber from, common::PhoneNumber to) {
     context.state->handleSendCallRequest(from, to);
 }

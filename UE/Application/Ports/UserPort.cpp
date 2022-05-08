@@ -60,10 +60,8 @@ void UserPort::showConnected()
                 logger.logInfo("View SMS");
                 break;
             case 2:
-                logger.logInfo("Call");
-                IUeGui::IDialMode& dial = gui.setDialMode();
-                gui.setAcceptCallback([this] {
-                });
+                logger.logInfo("Dial mode");
+                showDial();
                 break;
         }
         
@@ -71,6 +69,17 @@ void UserPort::showConnected()
     });
     gui.setRejectCallback([]{});
 
+}
+
+void UserPort::showDial()
+{
+    IUeGui::IDialMode& dial = gui.setDialMode();
+    gui.setAcceptCallback([this] {
+    });
+}
+
+void UserPort::setConversationMode(const common::PhoneNumber from) {
+    IUeGui::ICallMode& call = gui.setCallMode();
 }
 
 }

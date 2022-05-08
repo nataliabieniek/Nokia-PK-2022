@@ -53,12 +53,11 @@ void BtsPort::handleMessage(BinaryMessage msg)
         }
         case common::MessageId::CallRequest:
         {
-            handler->handleSendCallRequest(from, to);
+            handler->handleCallRequest(from);
             break;
         }
         default:
             logger.logError("unknow message: ", msgId, ", from: ", from);
-
         }
     }
     catch (std::exception const& ex)

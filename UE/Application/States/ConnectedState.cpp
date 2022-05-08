@@ -15,4 +15,8 @@ void ConnectedState::handleDisconnected()
     context.setState<NotConnectedState>();
 }
 
+void ConnectedState::handleCallRequest(common::PhoneNumber from) {
+    logger.logInfo("Received call request from ", from);
+}
+
 }

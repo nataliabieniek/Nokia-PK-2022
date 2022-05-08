@@ -19,6 +19,8 @@ public:
     void showConnecting() override;
     void showConnected() override;
 
+    void showDial() override;
+    void setConversationMode(common::PhoneNumber from) override;
 private:
     common::PrefixedLogger logger;
     IUeGui& gui;

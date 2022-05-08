@@ -30,6 +30,7 @@ public:
     void handleAttachReject() override;
     void handleDisconnected() override;
 
+    void handleCallRequest(common::PhoneNumber from) override;
     void handleSendCallRequest(common::PhoneNumber from, common::PhoneNumber to) override;
     void handleReceiveCallRequest(common::PhoneNumber from) override;
     void handleCallAccept(common::PhoneNumber from) override;

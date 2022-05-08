@@ -40,6 +40,10 @@ void BaseState::handleDisconnected()
     logger.logError("Uexpected: handleDisconnected");
 }
 
+void BaseState::handleCallRequest(common::PhoneNumber from) {
+    logger.logError("Uexpected: handleCallRequest");
+}
+
 void BaseState::handleCallAccept(common::PhoneNumber) {
     logger.logError("Uexpected: handleCallAccept");
 }
