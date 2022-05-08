@@ -12,9 +12,11 @@ public:
 
     void handleDisconnected() final;
 
-    void handleCallRequest(common::PhoneNumber from);
+    void handleCallRequest(common::PhoneNumber from) final;
+    void handleCallAccept(common::PhoneNumber from) final;
 
     void handleSendCallRequest(common::PhoneNumber to) final;
+    void handleSendCallAccept(common::PhoneNumber from) final;
 };
 
 }

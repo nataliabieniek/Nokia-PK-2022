@@ -16,13 +16,25 @@ void ConnectedState::handleDisconnected()
 }
 
 void ConnectedState::handleCallRequest(common::PhoneNumber from) {
-    logger.logInfo("Received call request from ", from);
+    using namespace std::chrono_literals;
+    context.timer.startTimer(30000ms);
+    context.user.showCallRequest(from);
 }
 
 void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
     using namespace std::chrono_literals;
     context.timer.startTimer(60000ms);
     context.bts.sendCallRequest(to);
+}
+
+void ConnectedState::handleCallAccept(common::PhoneNumber from) {
+    context.timer.stopTimer();
+    context.user.setConversationMode(from);
+}
+
+void ConnectedState::handleSendCallAccept(common::PhoneNumber from) {
+    context.timer.stopTimer();
+    context.bts.sendCallAccept(from);
 }
 
 }

@@ -79,12 +79,28 @@ void UserPort::showDial()
     gui.setAcceptCallback([&]() {
         common::PhoneNumber to = dial.getPhoneNumber();
         logger.logInfo(to);
-        IUeGui::ITextMode& call = gui.setAlertMode();
-        call.setText("Calling " + to_string(to) + "...");
+        IUeGui::ITextMode& calling = gui.setAlertMode();
+        calling.setText("Calling " + to_string(to) + "...");
         handler->handleSendCallRequest(to);
     });
     gui.setRejectCallback([this] {
         showConnected();
+    });
+}
+
+void UserPort::showCallRequest(common::PhoneNumber from)
+{
+    IUeGui::ITextMode& calling = gui.setAlertMode();
+    logger.logInfo("Someone is calling");
+    calling.setText(common::to_string(from) + " is calling...");
+
+    gui.setAcceptCallback([this, from] {
+       handler->handleSendCallAccept(from);
+        setConversationMode(from);
+    });
+
+    gui.setRejectCallback([this, from] {
+
     });
 }
 

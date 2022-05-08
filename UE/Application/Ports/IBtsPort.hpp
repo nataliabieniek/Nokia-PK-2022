@@ -17,9 +17,9 @@ public:
     virtual void handleDisconnected() = 0;
 
     virtual void handleCallRequest(common::PhoneNumber) = 0;
+    virtual void handleCallAccept(common::PhoneNumber from) =0;
 
     virtual void handleReceiveCallRequest(common::PhoneNumber from) = 0;
-    virtual void handleCallAccept(common::PhoneNumber) = 0;
     virtual void handleCallDrop(common::PhoneNumber) = 0;
 };
 
@@ -30,6 +30,7 @@ public:
 
     virtual void sendAttachRequest(common::BtsId) = 0;
     virtual void sendCallRequest(common::PhoneNumber to) = 0;
+    virtual void sendCallAccept(common::PhoneNumber from) = 0;
 };
 
 }

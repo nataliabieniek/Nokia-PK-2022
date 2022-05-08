@@ -20,6 +20,7 @@ public:
     void showConnected() override;
 
     void showDial() override;
+    void showCallRequest(common::PhoneNumber from) override;
     void setConversationMode(common::PhoneNumber from) override;
 private:
     common::PrefixedLogger logger;
