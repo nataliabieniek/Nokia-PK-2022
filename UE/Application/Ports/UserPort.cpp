@@ -3,6 +3,7 @@
 
 #include <UeGui/ICallMode.hpp>
 #include "UeGui/IDialMode.hpp"
+#include "UeGui/ITextMode.hpp"
 
 
 namespace ue
@@ -43,7 +44,7 @@ void UserPort::showConnected()
     menu.addSelectionListItem("View SMS", "");
     menu.addSelectionListItem("Call","");
 
-    gui.setAcceptCallback([this]{
+    gui.setAcceptCallback([this](){
         auto indx = gui.setListViewMode().getCurrentItemIndex();
         //logger.logInfo(indx.second);
         //if(indx.second == 0) {
@@ -74,8 +75,13 @@ void UserPort::showConnected()
 void UserPort::showDial()
 {
     IUeGui::IDialMode& dial = gui.setDialMode();
-    gui.setAcceptCallback([this] {
 
+    gui.setAcceptCallback([&]() {
+        common::PhoneNumber to = dial.getPhoneNumber();
+        logger.logInfo(to);
+        IUeGui::ITextMode& call = gui.setAlertMode();
+        call.setText("Calling " + to_string(to) + "...");
+        handler->handleSendCallRequest(to);
     });
     gui.setRejectCallback([this] {
         showConnected();
