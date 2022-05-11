@@ -2,7 +2,7 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, staticCodeAnalysis ]
   pull_request:
     branches: [ main ]
 
@@ -38,3 +38,8 @@ jobs:
     - name: run UeApplication ut
       run: ./UE/Tests/Application/UeApplicationUT
 
+    - name: Install cppcheck
+      run: apt-get -y install cppcheck
+
+    - name: run cppcheck
+      run: cppcheck UE -i UE/Tests
