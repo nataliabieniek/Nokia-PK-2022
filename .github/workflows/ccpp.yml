@@ -2,7 +2,7 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ main, staticCodeAnalysis ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
