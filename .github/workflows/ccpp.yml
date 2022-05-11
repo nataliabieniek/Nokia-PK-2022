@@ -39,7 +39,7 @@ jobs:
       run: ./UE/Tests/Application/UeApplicationUT
 
     - name: Install cppcheck
-      run: apt-get -y install cppcheck
+      run: sudo apt-get -y install cppcheck
 
     - name: run cppcheck
       run: cppcheck UE -i UE/Tests
