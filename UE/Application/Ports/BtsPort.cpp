@@ -79,4 +79,14 @@ void BtsPort::handleDisconnected() {
     handler->handleDisconnected();
 }
 
+void BtsPort::sendSms(common::PhoneNumber to, const std::string &message)
+{
+    logger.logDebug("sendSms: ", to);
+    common::OutgoingMessage msg{common::MessageId::Sms,
+                                    phoneNumber,
+                                    to};
+    msg.writeText(message);
+    transport.sendMessage(msg.getMessage());
+}
+
 }

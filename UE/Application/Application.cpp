@@ -55,4 +55,13 @@ void Application::handleReceiveSms(common::PhoneNumber from, std::string &messag
 {
     context.state->handleReceiveSms(from, message);
 }
+
+void Application::handleSendSms(common::PhoneNumber to, const std::string &message)
+{
+    context.state->handleSendSms(to, message);
 }
+
+
+}
+
+
