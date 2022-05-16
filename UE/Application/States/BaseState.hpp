@@ -23,6 +23,8 @@ public:
     void handleReceiveSms(common::PhoneNumber from, std::string& message) override;
     void handleSendSms(common::PhoneNumber to, const std::string& message) override;
 
+    void handleUnknownRecipient(common::PhoneNumber from) override;
+
 protected:
     Context& context;
     common::PrefixedLogger logger;

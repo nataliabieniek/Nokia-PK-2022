@@ -61,6 +61,10 @@ void Application::handleSendSms(common::PhoneNumber to, const std::string &messa
     context.state->handleSendSms(to, message);
 }
 
+void Application::handleUnknownRecipient(common::PhoneNumber from)
+{
+    context.state->handleUnknownRecipient(from);
+}
 
 }
 

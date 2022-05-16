@@ -14,6 +14,8 @@ public:
     void handleReceiveSms(common::PhoneNumber from, std::string& message) final;
     void handleSendSms(common::PhoneNumber to, const std::string& message) final;
 
+    void handleUnknownRecipient(common::PhoneNumber from) final;
+
 };
 
 }

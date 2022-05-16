@@ -17,6 +17,8 @@ public:
     Sms getSmsFromDB(int smsIndex);
     std::vector<Sms>& getSmsList();
 
+    void setUnknownRecipient();
+
 private:
     std::vector <Sms> smsList;
 };

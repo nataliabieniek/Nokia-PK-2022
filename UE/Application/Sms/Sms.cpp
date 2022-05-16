@@ -6,6 +6,7 @@ namespace ue {
         Sms::to = to;
         Sms::flgIsViewed = false;
         Sms::smsMessage = smsMessage;
+        Sms::unknownRecipient = false;
     }
 
     void Sms::setSmsIsViewed() {
@@ -26,6 +27,14 @@ namespace ue {
 
     bool Sms::isViewed() {
         return flgIsViewed;
+    }
+
+    bool Sms::isUnknownRecipient() {
+        return unknownRecipient;
+    }
+
+    void Sms::setUnknownRecipient() {
+        unknownRecipient = true;
     }
 }
 
