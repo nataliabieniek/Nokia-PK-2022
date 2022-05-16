@@ -5,6 +5,7 @@ namespace ue {
         Sms::from = from;
         Sms::to = to;
         Sms::flgIsViewed = false;
+        Sms::smsMessage = smsMessage;
     }
 
     void Sms::setSmsIsViewed() {
