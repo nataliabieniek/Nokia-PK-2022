@@ -30,8 +30,4 @@ void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& me
     context.bts.sendSms(to, message);
 }
 
-void ConnectedState::handleShowSmsList() {
-    context.setState<ViewingSms>();
-}
-
 }
