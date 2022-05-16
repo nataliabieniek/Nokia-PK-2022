@@ -30,6 +30,8 @@ private:
     common::PhoneNumber phoneNumber;
     SmsDb& smsDB;
     IUserEventsHandler* handler = nullptr;
+
+    void showSmsList();
 };
 
 }

@@ -1,5 +1,6 @@
 #include "ConnectedState.hpp"
 #include "NotConnectedState.hpp"
+#include "ViewingSms.hpp"
 
 namespace ue
 {
@@ -27,6 +28,10 @@ void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& me
     newSms.setSmsIsViewed();
     context.smsDB.addSmsToDB(newSms);
     context.bts.sendSms(to, message);
+}
+
+void ConnectedState::handleShowSmsList() {
+    context.setState<ViewingSms>();
 }
 
 }

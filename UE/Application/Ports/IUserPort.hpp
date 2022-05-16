@@ -8,6 +8,7 @@ namespace ue
 class IUserEventsHandler
 {
 public:
+//    virtual void handleShowSmsList() = 0;
     virtual ~IUserEventsHandler() = default;
     virtual void handleSendSms(common::PhoneNumber to, const std::string& message) = 0;
 };
