@@ -19,10 +19,14 @@ namespace ue
 
             bool isViewed();
 
+            bool isUnknownRecipient();
+            void setUnknownRecipient();
+
         private:
             common::PhoneNumber from{};
             common::PhoneNumber to{};
             bool flgIsViewed;
             std::string smsMessage;
+            bool unknownRecipient;
     };
 }

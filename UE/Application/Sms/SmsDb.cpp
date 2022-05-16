@@ -19,3 +19,7 @@ ue::Sms ue::SmsDb::getSmsFromDB(int smsId)
 std::vector<ue::Sms>& ue::SmsDb::getSmsList() {
     return smsList;
 }
+
+void ue::SmsDb::setUnknownRecipient() {
+    smsList.back().setUnknownRecipient();
+}

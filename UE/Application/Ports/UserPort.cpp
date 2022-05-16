@@ -94,6 +94,10 @@ void UserPort::setSmsListView()
         emptyList.setText("No one like you :'( \n It's empty.");
     } else {
         for(auto sms: smsList) {
+            if(sms.isUnknownRecipient()) {
+                smsListView.addSelectionListItem("TO: UNKNOWN RECIPIENT", "");
+                continue;
+            }
             if(sms.isViewed()) {
                 if(sms.getFrom() == phoneNumber) {
                     smsListView.addSelectionListItem("TO:"+ to_string(sms.getTo()) + " " + sms.getsmsMessageTest().substr(0,3) + "...", "");
