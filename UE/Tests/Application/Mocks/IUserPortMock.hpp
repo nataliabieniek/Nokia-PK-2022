@@ -12,6 +12,8 @@ public:
     IUserEventsHandlerMock();
     ~IUserEventsHandlerMock() override;
 
+    MOCK_METHOD(void, handleSendSms, (common::PhoneNumber to, const std::string &message), (final));
+
 };
 
 class IUserPortMock : public IUserPort

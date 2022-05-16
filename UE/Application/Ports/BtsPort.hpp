@@ -20,6 +20,7 @@ public:
 private:
     void handleMessage(BinaryMessage msg);
     void handleDisconnected();
+    void sendSms(common::PhoneNumber to, const std::string& message) override;
 
     common::PrefixedLogger logger;
     common::ITransport& transport;
