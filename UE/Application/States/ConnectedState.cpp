@@ -18,6 +18,7 @@ void ConnectedState::handleReceiveSms(common::PhoneNumber from, std::string& mes
 {
     Sms newSms{from, context.phoneNumber, message};
     context.smsDB.addSmsToDB(newSms);
+    context.user.showNewSms();
 }
 
 void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& message)

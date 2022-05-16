@@ -19,6 +19,10 @@ public:
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
+    void setSmsEditView() override;
+    void setSmsListView() override;
+    void showNewSms() override;
+    void checkUnread() override;
 
 private:
     common::PrefixedLogger logger;
