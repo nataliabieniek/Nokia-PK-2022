@@ -16,6 +16,11 @@ public:
 
     void handleUnknownRecipient(common::PhoneNumber from) final;
 
+    void handleCallRequest(common::PhoneNumber from) final;
+    void handleSendCallRequest(common::PhoneNumber to) final;
+    void handleCallAccept(common::PhoneNumber from) final;
+    void handleSendCallAccept(common::PhoneNumber from) final;
+
 };
 
 }

@@ -35,4 +35,30 @@ void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
     context.smsDB.setUnknownRecipient();
 }
 
+void ConnectedState::handleCallRequest(common::PhoneNumber from)
+{
+    using namespace std::chrono_literals;
+    context.timer.startTimer(30000ms);
+    context.user.showCallRequest(from);
+}
+
+void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
+    using namespace std::chrono_literals;
+    context.timer.startTimer(60000ms);
+    context.bts.sendCallRequest(to);
+}
+
+void ConnectedState::handleCallAccept(common::PhoneNumber from)
+{
+    context.timer.stopTimer();
+    context.user.showConversationMode(from);
+}
+
+void ConnectedState::handleSendCallAccept(common::PhoneNumber from)
+{
+    context.timer.stopTimer();
+    logger.logInfo(from);
+    context.bts.sendCallAccept(from);
+}
+
 }

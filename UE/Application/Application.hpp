@@ -36,6 +36,11 @@ public:
 
     void handleUnknownRecipient(common::PhoneNumber from) override;
 
+    void handleCallRequest(common::PhoneNumber from) override;
+    void handleSendCallRequest(common::PhoneNumber to) override;
+    void handleCallAccept(common::PhoneNumber from) override;
+    void handleSendCallAccept(common::PhoneNumber from) override;
+
 private:
     Context context;
     common::PrefixedLogger logger;

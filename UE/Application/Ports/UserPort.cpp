@@ -3,6 +3,7 @@
 #include "UeGui/ISmsComposeMode.hpp"
 #include "UeGui/ITextMode.hpp"
 #include "UeGui/IDialMode.hpp"
+#include "UeGui/ICallMode.hpp"
 #include "Messages/PhoneNumber.hpp"
 #include "Sms/SmsDb.hpp"
 #include <algorithm>
@@ -60,6 +61,7 @@ void UserPort::showConnected()
                 break;
             case 2:
                 logger.logInfo("Dial mode");
+                showDial();
                 break;
         }
     });
@@ -145,6 +147,47 @@ void UserPort::checkUnread()
             gui.showNewSms(false);
         }
     }
+}
+
+void UserPort::showDial()
+{
+    IUeGui::IDialMode& dial = gui.setDialMode();
+
+    gui.setAcceptCallback([&]() {
+        common::PhoneNumber to = dial.getPhoneNumber();
+        logger.logInfo(to);
+        IUeGui::ITextMode& calling = gui.setAlertMode();
+        calling.setText("Calling " + to_string(to) + "...");
+        handler->handleSendCallRequest(to);
+    });
+    gui.setRejectCallback([&] {
+        showConnected();
+    });
+}
+
+void UserPort::showCallRequest(common::PhoneNumber from)
+{
+    IUeGui::ITextMode& calling = gui.setAlertMode();
+    logger.logInfo("Someone is calling");
+    calling.setText(common::to_string(from) + " is calling...");
+
+    gui.setAcceptCallback([&, from] {
+
+        handler->handleSendCallAccept(from);
+        logger.logInfo(common::to_string(from));
+        showConversationMode(from);
+    });
+
+    gui.setRejectCallback([&, from] {
+        showConnected();
+    });
+}
+
+void UserPort::showConversationMode(common::PhoneNumber from)
+{
+    IUeGui::ICallMode& call = gui.setCallMode();
+    call.clearIncomingText();
+    call.clearOutgoingText();
 }
 
 }
