@@ -44,7 +44,7 @@ void ConnectedState::handleCallRequest(common::PhoneNumber from)
 
 void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
     using namespace std::chrono_literals;
-    context.timer.startTimer(60000ms);
+    context.timer.startTimer(60s);
     context.bts.sendCallRequest(to);
 }
 
@@ -60,5 +60,19 @@ void ConnectedState::handleSendCallAccept(common::PhoneNumber from)
     logger.logInfo(from);
     context.bts.sendCallAccept(from);
 }
+
+void ConnectedState::handleSendCallDrop(common::PhoneNumber to)
+{
+    context.timer.stopTimer();
+    context.bts.sendCallDrop(to);
+}
+
+void ConnectedState::handleCallDrop(common::PhoneNumber from)
+{
+    context.timer.stopTimer();
+    context.user.showConnected();
+}
+
+
 
 }

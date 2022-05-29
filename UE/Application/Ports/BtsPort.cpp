@@ -70,6 +70,10 @@ void BtsPort::handleMessage(BinaryMessage msg)
             handler->handleCallAccept(from);
             break;
         }
+        case common::MessageId::CallDropped: {
+            handler->handleCallDrop(from);
+            break;
+        }
         default:
             logger.logError("unknow message: ", msgId, ", from: ", from);
 
@@ -120,6 +124,14 @@ void BtsPort::sendCallAccept(common::PhoneNumber from)
     common::OutgoingMessage msg{common::MessageId::CallAccepted,
                                 phoneNumber,
                                 from};
+    transport.sendMessage(msg.getMessage());
+}
+
+void BtsPort::sendCallDrop(common::PhoneNumber to)
+{
+    common::OutgoingMessage msg{common::MessageId::CallDropped,
+                                phoneNumber,
+                                to};
     transport.sendMessage(msg.getMessage());
 }
 

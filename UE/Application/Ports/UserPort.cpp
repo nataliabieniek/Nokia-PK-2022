@@ -159,6 +159,11 @@ void UserPort::showDial()
         IUeGui::ITextMode& calling = gui.setAlertMode();
         calling.setText("Calling " + to_string(to) + "...");
         handler->handleSendCallRequest(to);
+
+        gui.setRejectCallback([&, to]() {
+            handler->handleSendCallDrop(to);
+            showConnected();
+        });
     });
     gui.setRejectCallback([&] {
         showConnected();
@@ -179,6 +184,7 @@ void UserPort::showCallRequest(common::PhoneNumber from)
     });
 
     gui.setRejectCallback([&, from] {
+        handler->handleSendCallDrop(from);
         showConnected();
     });
 }

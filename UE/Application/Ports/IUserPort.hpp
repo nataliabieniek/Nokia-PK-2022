@@ -15,6 +15,7 @@ public:
     virtual void handleSendCallRequest(common::PhoneNumber to) = 0;
 
     virtual void handleSendCallAccept(common::PhoneNumber from) = 0;
+    virtual void handleSendCallDrop(common::PhoneNumber from) = 0;
 };
 
 class IUserPort

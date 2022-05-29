@@ -20,6 +20,9 @@ public:
     void handleSendCallRequest(common::PhoneNumber to) final;
     void handleCallAccept(common::PhoneNumber from) final;
     void handleSendCallAccept(common::PhoneNumber from) final;
+    void handleSendCallDrop(common::PhoneNumber to) final;
+    void handleCallDrop(common::PhoneNumber from) final;
+
 
 };
 

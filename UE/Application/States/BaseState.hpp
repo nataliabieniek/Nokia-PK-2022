@@ -29,6 +29,8 @@ public:
     void handleSendCallRequest(common::PhoneNumber to) override;
     void handleCallAccept(common::PhoneNumber from) override;
     void handleSendCallAccept(common::PhoneNumber from) override;
+    void handleSendCallDrop(common::PhoneNumber to) override;
+    void handleCallDrop(common::PhoneNumber from) override;
 
 protected:
     Context& context;

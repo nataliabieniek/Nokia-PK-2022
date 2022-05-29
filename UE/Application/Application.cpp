@@ -85,6 +85,16 @@ void Application::handleSendCallAccept(common::PhoneNumber from)
     context.state->handleSendCallAccept(from);
 }
 
+void Application::handleSendCallDrop(common::PhoneNumber to)
+{
+    context.state->handleSendCallDrop(to);
+}
+
+void Application::handleCallDrop(common::PhoneNumber from)
+{
+    context.state->handleCallDrop(from);
+}
+
 }
 
 
