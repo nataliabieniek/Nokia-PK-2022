@@ -66,6 +66,35 @@ void Application::handleUnknownRecipient(common::PhoneNumber from)
     context.state->handleUnknownRecipient(from);
 }
 
+void Application::handleCallRequest(common::PhoneNumber from)
+{
+    context.state->handleCallRequest(from);
+}
+
+void Application::handleSendCallRequest(common::PhoneNumber to) {
+    context.state->handleSendCallRequest(to);
+}
+
+void Application::handleCallAccept(common::PhoneNumber from)
+{
+    context.state->handleCallAccept(from);
+}
+
+void Application::handleSendCallAccept(common::PhoneNumber from)
+{
+    context.state->handleSendCallAccept(from);
+}
+
+void Application::handleSendCallDrop(common::PhoneNumber to)
+{
+    context.state->handleSendCallDrop(to);
+}
+
+void Application::handleCallDrop(common::PhoneNumber from)
+{
+    context.state->handleCallDrop(from);
+}
+
 }
 
 

@@ -24,6 +24,11 @@ public:
     void showNewSms() override;
     void checkUnread() override;
 
+    void showDial() override;
+    void showCallRequest(common::PhoneNumber from) override;
+    void showConversationMode(common::PhoneNumber from) override;
+
+
 private:
     common::PrefixedLogger logger;
     IUeGui& gui;

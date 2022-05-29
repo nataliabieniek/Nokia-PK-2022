@@ -21,6 +21,7 @@ public:
 private:
     common::PrefixedLogger logger;
     ITimerEventsHandler* handler = nullptr;
+    bool isActive = false;
 };
 
 }
