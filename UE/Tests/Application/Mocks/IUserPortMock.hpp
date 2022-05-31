@@ -36,6 +36,7 @@ public:
     MOCK_METHOD(void, showDial, (), (final));
     MOCK_METHOD(void, showCallRequest, (common::PhoneNumber from), (final));
     MOCK_METHOD(void, showConversationMode, (common::PhoneNumber from), (final));
+    MOCK_METHOD(void, showUnknownRecipient, (common::PhoneNumber from), (final));
 };
 
 }

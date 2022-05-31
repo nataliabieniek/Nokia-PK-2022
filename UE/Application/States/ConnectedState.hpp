@@ -23,7 +23,6 @@ public:
     void handleSendCallDrop(common::PhoneNumber to) final;
     void handleCallDrop(common::PhoneNumber from) final;
 
-
 };
 
 }

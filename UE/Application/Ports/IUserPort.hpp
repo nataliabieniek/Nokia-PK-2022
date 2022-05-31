@@ -34,6 +34,8 @@ public:
     virtual void showDial() = 0;
     virtual void showCallRequest(common::PhoneNumber from) = 0;
     virtual void showConversationMode(common::PhoneNumber from) = 0;
+
+    virtual void showUnknownRecipient(common::PhoneNumber from) = 0;
 };
 
 }

@@ -32,7 +32,8 @@ void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& me
 
 void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 {
-    context.smsDB.setUnknownRecipient();
+    //context.smsDB.setUnknownRecipient();
+    context.user.showUnknownRecipient(from);
 }
 
 void ConnectedState::handleCallRequest(common::PhoneNumber from)
