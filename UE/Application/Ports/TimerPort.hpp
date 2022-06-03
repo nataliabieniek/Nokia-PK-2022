@@ -3,6 +3,8 @@
 #include "ITimerPort.hpp"
 #include "Logger/PrefixedLogger.hpp"
 
+#include <future>
+
 
 namespace ue
 {
@@ -22,10 +24,8 @@ namespace ue
     private:
         common::PrefixedLogger logger;
         ITimerEventsHandler* handler = nullptr;
-        bool isActive = false;
-
         bool isRunning = false;
-        bool isFree = true;
+        std::future<void> future;
     };
 
 }
