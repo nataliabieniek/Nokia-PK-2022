@@ -207,7 +207,6 @@ void UserPort::showConversationMode(common::PhoneNumber from)
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
 {
-
     IUeGui::ITextMode& alert = gui.setAlertMode();
     alert.setText("Unavailable.");
 
@@ -230,13 +229,9 @@ void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) 
     call.appendIncomingText(common::to_string(from) + ": " + text);
 }
 
-void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
-    IUeGui::ITextMode& alert = gui.setAlertMode();
-    alert.setText(to_string(from) + " is busy");
-
-    gui.setRejectCallback([&] {
-        showConnected();
-    });
+void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) {
+    IUeGui::ICallMode& call = gui.setCallMode();
+    call.appendIncomingText(common::to_string(from) + ": " + text);
 }
 
 
