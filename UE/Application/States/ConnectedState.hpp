@@ -24,6 +24,9 @@ public:
     void handleSendCallDrop(common::PhoneNumber to) final;
     void handleCallDrop(common::PhoneNumber from) final;
 
+    void handleCallReceiveText(common::PhoneNumber from, std::string &text) final;
+    void handleCallSendText(common::PhoneNumber to, const std::string& text) final;
+
 };
 
 }

@@ -95,6 +95,14 @@ void Application::handleCallDrop(common::PhoneNumber from)
     context.state->handleCallDrop(from);
 }
 
+void Application::handleCallReceiveText(common::PhoneNumber from, std::string &text) {
+    context.state->handleCallReceiveText(from, text);
+}
+
+void Application::handleCallSendText(common::PhoneNumber to, const std::string& text) {
+    logger.logInfo("HandleCallSendText in application");
+    context.state->handleCallSendText(to, text);
+}
 }
 
 

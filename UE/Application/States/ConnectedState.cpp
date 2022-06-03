@@ -82,6 +82,17 @@ void ConnectedState::handleCallDrop(common::PhoneNumber from)
     context.user.showConnected();
 }
 
+void ConnectedState::handleCallReceiveText(common::PhoneNumber from, std::string &text) {
+    context.timer.stopTimer();
+    using namespace std::chrono_literals;
+    context.timer.startTimer(120s);
+    context.user.updateTalkMessages(from, text);
+}
+
+void ConnectedState::handleCallSendText(common::PhoneNumber to, const std::string& text) {
+    logger.logInfo("Connected state: " + common::to_string(to) + " " + text);
+    context.bts.sendCallTalk(to, text);
+}
 
 
 }

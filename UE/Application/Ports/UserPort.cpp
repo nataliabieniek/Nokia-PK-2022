@@ -194,6 +194,15 @@ void UserPort::showConversationMode(common::PhoneNumber from)
     IUeGui::ICallMode& call = gui.setCallMode();
     call.clearIncomingText();
     call.clearOutgoingText();
+    logger.logInfo(common::to_string(from));
+
+    gui.setAcceptCallback([&, from] {
+        logger.logInfo("Accept:" + common::to_string(from));
+        auto text = call.getOutgoingText();
+        updateTalkMessages(phoneNumber, text);
+        handler->handleCallSendText(from, text);
+        call.clearOutgoingText();
+    });
 }
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
@@ -204,8 +213,6 @@ void UserPort::showUnknownRecipient(common::PhoneNumber)
     gui.setRejectCallback([&] {
         showConnected();
     });
-
-
 }
 
 void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
@@ -215,6 +222,11 @@ void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
     gui.setRejectCallback([&] {
         showConnected();
     });
+}
+
+void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) {
+    IUeGui::ICallMode& call = gui.setCallMode();
+    call.appendIncomingText(common::to_string(from) + ": " + text);
 }
 
 
