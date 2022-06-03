@@ -28,6 +28,8 @@ public:
     void showCallRequest(common::PhoneNumber from) override;
     void showConversationMode(common::PhoneNumber from) override;
 
+    void showUnknownRecipient(common::PhoneNumber from) override;
+
 
 private:
     common::PrefixedLogger logger;

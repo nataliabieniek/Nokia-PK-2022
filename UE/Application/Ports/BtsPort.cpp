@@ -34,6 +34,7 @@ void BtsPort::handleMessage(BinaryMessage msg)
         auto from = reader.readPhoneNumber();
         auto to = reader.readPhoneNumber();
 
+
         switch (msgId)
         {
         case common::MessageId::Sib:
@@ -75,7 +76,7 @@ void BtsPort::handleMessage(BinaryMessage msg)
             break;
         }
         default:
-            logger.logError("unknow message: ", msgId, ", from: ", from);
+            logger.logError("unknown message: ", msgId, ", from: ", from);
 
         }
     }

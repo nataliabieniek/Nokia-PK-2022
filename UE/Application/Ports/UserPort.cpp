@@ -196,4 +196,17 @@ void UserPort::showConversationMode(common::PhoneNumber from)
     call.clearOutgoingText();
 }
 
+void UserPort::showUnknownRecipient(common::PhoneNumber)
+{
+    IUeGui::ITextMode& alert = gui.setAlertMode();
+    alert.setText("Unavailable.");
+
+    gui.setRejectCallback([&] {
+        showConnected();
+    });
+
+
+}
+
+
 }

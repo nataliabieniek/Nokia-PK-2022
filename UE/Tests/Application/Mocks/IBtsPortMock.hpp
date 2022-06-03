@@ -19,7 +19,6 @@ public:
     MOCK_METHOD(void, handleReceiveSms, (common::PhoneNumber from, std::string& message), (final));
 
     MOCK_METHOD(void, handleUnknownRecipient, (common::PhoneNumber from), (final));
-
     MOCK_METHOD(void, handleCallRequest, (common::PhoneNumber from), (final));
     MOCK_METHOD(void, handleCallAccept, (common::PhoneNumber from), (final));
     MOCK_METHOD(void, handleCallDrop, (common::PhoneNumber to), (final));
