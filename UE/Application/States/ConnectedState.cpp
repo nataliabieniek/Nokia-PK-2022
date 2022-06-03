@@ -32,7 +32,7 @@ void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& me
 
 void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 {
-    //context.smsDB.setUnknownRecipient();
+    isTalking = false;
     context.user.showUnknownRecipient(from);
 }
 
@@ -90,6 +90,9 @@ void ConnectedState::handleCallReceiveText(common::PhoneNumber from, std::string
 }
 
 void ConnectedState::handleCallSendText(common::PhoneNumber to, const std::string& text) {
+    context.timer.stopTimer();
+    using namespace std::chrono_literals;
+    context.timer.startTimer(120s);
     logger.logInfo("Connected state: " + common::to_string(to) + " " + text);
     context.bts.sendCallTalk(to, text);
 }

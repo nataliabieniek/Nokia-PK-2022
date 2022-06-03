@@ -207,6 +207,7 @@ void UserPort::showConversationMode(common::PhoneNumber from)
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
 {
+
     IUeGui::ITextMode& alert = gui.setAlertMode();
     alert.setText("Unavailable.");
 
