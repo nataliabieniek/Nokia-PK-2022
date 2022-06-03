@@ -64,6 +64,7 @@ void ConnectedState::handleSendCallAccept(common::PhoneNumber from)
 
 void ConnectedState::handleSendCallDrop(common::PhoneNumber to)
 {
+    context.user.showConnected();
     context.timer.stopTimer();
     context.bts.sendCallDrop(to);
 }
