@@ -7,6 +7,7 @@ namespace ue
 
 class ConnectedState : public BaseState
 {
+    bool isTalking = false;
 public:
     ConnectedState(Context& context);
 

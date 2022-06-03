@@ -38,14 +38,20 @@ void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 
 void ConnectedState::handleCallRequest(common::PhoneNumber from)
 {
+    if(isTalking) {
+        context.bts.sendCallDrop(from);
+        return;
+    }
     using namespace std::chrono_literals;
     context.timer.startTimer(30000ms);
+    isTalking = true;
     context.user.showCallRequest(from);
 }
 
 void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
     using namespace std::chrono_literals;
     context.timer.startTimer(60s);
+    isTalking = true;
     context.bts.sendCallRequest(to);
 }
 
@@ -64,12 +70,14 @@ void ConnectedState::handleSendCallAccept(common::PhoneNumber from)
 
 void ConnectedState::handleSendCallDrop(common::PhoneNumber to)
 {
+    isTalking = false;
     context.timer.stopTimer();
     context.bts.sendCallDrop(to);
 }
 
 void ConnectedState::handleCallDrop(common::PhoneNumber from)
 {
+    isTalking = false;
     context.timer.stopTimer();
     context.user.showConnected();
 }

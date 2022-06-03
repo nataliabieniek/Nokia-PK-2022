@@ -30,6 +30,8 @@ public:
 
     void showUnknownRecipient(common::PhoneNumber from) override;
 
+    void showUnavailableRecipient(common::PhoneNumber &from) override;
+
 
 private:
     common::PrefixedLogger logger;

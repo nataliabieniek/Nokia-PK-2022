@@ -36,6 +36,8 @@ public:
     virtual void showConversationMode(common::PhoneNumber from) = 0;
 
     virtual void showUnknownRecipient(common::PhoneNumber from) = 0;
+
+    virtual void showUnavailableRecipient(common::PhoneNumber &from) = 0;
 };
 
 }

@@ -208,5 +208,14 @@ void UserPort::showUnknownRecipient(common::PhoneNumber)
 
 }
 
+void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
+    IUeGui::ITextMode& alert = gui.setAlertMode();
+    alert.setText(to_string(from) + " is busy");
+
+    gui.setRejectCallback([&] {
+        showConnected();
+    });
+}
+
 
 }
