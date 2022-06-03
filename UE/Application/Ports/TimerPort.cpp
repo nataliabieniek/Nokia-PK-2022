@@ -8,22 +8,22 @@ namespace ue
             : logger(logger, "[TIMER PORT]")
     {}
 
-    void TimerPort::start(ITimerEventsHandler &handler)s
+    void TimerPort::start(ITimerEventsHandler &handler)
     {
-        logger.logDebug("Started");
+        logger.logDebug("Timer started");
         this->handler = &handler;
     }
 
     void TimerPort::stop()
     {
-        logger.logDebug("Stoped");
+        logger.logDebug("Timer stopped");
         handler = nullptr;
     }
 
     void TimerPort::startTimer(Duration duration)
     {
         auto durationCount = duration.count();
-        logger.logDebug("Start timer: ", durationCount, "ms");
+        logger.logInfo("Start timer: ", durationCount, "ms");
         auto startTime = std::chrono::system_clock::now();
         std::thread t([&, durationCount](){
             while(!isFree){}
@@ -42,7 +42,7 @@ namespace ue
 
     void TimerPort::stopTimer()
     {
-        logger.logDebug("Stop timer");
+        logger.logInfo("Stop timer");
         isRunning = false;
     }
 

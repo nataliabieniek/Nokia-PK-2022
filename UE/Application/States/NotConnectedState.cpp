@@ -17,4 +17,9 @@ void NotConnectedState::handleSib(common::BtsId btsId) {
     context.setState<ConnectingState>();
 }
 
+void NotConnectedState::handleTimeout()
+{
+    context.timer.stopTimer();
+}
+
 }

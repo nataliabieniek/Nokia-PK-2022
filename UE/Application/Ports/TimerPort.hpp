@@ -16,8 +16,8 @@ namespace ue
         void stop();
 
         // ITimerPort interface
-        void startTimer(Duration duration) override;
-        void stopTimer() override;
+        void startTimer(Duration duration) final;
+        void stopTimer() final;
 
     private:
         common::PrefixedLogger logger;
