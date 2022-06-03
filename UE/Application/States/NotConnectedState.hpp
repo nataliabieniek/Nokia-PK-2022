@@ -11,7 +11,7 @@ public:
     explicit NotConnectedState(Context& context);
     void handleSib(common::BtsId btsId) override;
 
-    void handleTimeout() override;
+    void handleTimeout() final;
 };
 
 }

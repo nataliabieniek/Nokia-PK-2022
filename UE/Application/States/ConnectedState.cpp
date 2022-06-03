@@ -9,7 +9,6 @@ ConnectedState::ConnectedState(Context &context)
     : BaseState(context, "ConnectedState")
 {
     context.user.showConnected();
-    context.timer.stopTimer();
 }
 
 void ConnectedState::handleDisconnected()
@@ -51,6 +50,7 @@ void ConnectedState::handleCallRequest(common::PhoneNumber from)
 
 void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
     using namespace std::chrono_literals;
+    context.timer.startTimer(30000ms);
     context.timer.startTimer(60s);
     isTalking = true;
     context.bts.sendCallRequest(to);
@@ -81,6 +81,11 @@ void ConnectedState::handleCallDrop(common::PhoneNumber from)
 {
     isTalking = false;
     context.timer.stopTimer();
+    context.user.showConnected();
+}
+
+void ConnectedState::handleTimeout()
+{
     context.user.showConnected();
 }
 
