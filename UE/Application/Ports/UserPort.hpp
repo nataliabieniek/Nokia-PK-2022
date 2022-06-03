@@ -25,6 +25,7 @@ public:
     void checkUnread() override;
 
     void showDial() override;
+//    void showDialCalling(IUeGui::IDialMode dial) override;
     void showCallRequest(common::PhoneNumber from) override;
     void showConversationMode(common::PhoneNumber from) override;
 

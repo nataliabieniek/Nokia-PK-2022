@@ -22,29 +22,32 @@ namespace ue
 
     void TimerPort::startTimer(Duration duration)
     {
-        using namespace std::chrono_literals;
-        logger.logInfo("Start timer: ", duration.count(), "ms");
-
-        constexpr auto interval = 100ms;
-        isRunning = true;
-
-        future = std::async([this, interval, numCycles = duration / interval] {
-            for (auto i = decltype(numCycles){0}; i < numCycles; ++i)
-            {
-                std::this_thread::sleep_for(interval);
-                if (!isRunning)
-                {
-                    return;
-                }
-            }
-            handler->handleTimeout();
+        if(isRunning) {
             isRunning = false;
-        });
+            std::this_thread::sleep_for(2 * interval);
+        }
+
+        logger.logInfo("Start timer: ", duration.count(), "ms");
+        isRunning = true;
+        timerThread = std::thread(&TimerPort::processingTimeout, this, duration);
+        timerThread.detach();
     }
 
     void TimerPort::stopTimer()
     {
         logger.logInfo("Stop timer");
+        isRunning = false;
+    }
+
+    void TimerPort::processingTimeout(std::chrono::duration<double> sleepTime) {
+        auto start = std::chrono::system_clock::now();
+        while(start + sleepTime > std::chrono::system_clock::now()) {
+            std::this_thread::sleep_for(interval);
+            if(!isRunning) {
+                return;
+            }
+        }
+        handler->handleTimeout();
         isRunning = false;
     }
 

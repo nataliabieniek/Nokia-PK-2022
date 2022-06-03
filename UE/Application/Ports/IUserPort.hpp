@@ -1,5 +1,6 @@
 #pragma once
 #include "Messages/PhoneNumber.hpp"
+#include "IUeGui.hpp"
 
 
 namespace ue
@@ -34,6 +35,7 @@ public:
     virtual void checkUnread() = 0;
 
     virtual void showDial() = 0;
+//    virtual void showDialCalling(IUeGui::IDialMode dial) = 0;
     virtual void showCallRequest(common::PhoneNumber from) = 0;
     virtual void showConversationMode(common::PhoneNumber from) = 0;
 

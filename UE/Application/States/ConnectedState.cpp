@@ -85,6 +85,7 @@ void ConnectedState::handleCallDrop(common::PhoneNumber from)
 
 void ConnectedState::handleTimeout()
 {
+    isTalking = false;
     context.user.showConnected();
 }
 

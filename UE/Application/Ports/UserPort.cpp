@@ -164,6 +164,8 @@ void UserPort::showDial()
             handler->handleSendCallDrop(to);
             showConnected();
         });
+
+        gui.setAcceptCallback([] {});
     });
     gui.setRejectCallback([&] {
         showConnected();
@@ -207,6 +209,7 @@ void UserPort::showConversationMode(common::PhoneNumber from)
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
 {
+
     IUeGui::ITextMode& alert = gui.setAlertMode();
     alert.setText("Unavailable.");
 
@@ -228,11 +231,4 @@ void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) 
     IUeGui::ICallMode& call = gui.setCallMode();
     call.appendIncomingText(common::to_string(from) + ": " + text);
 }
-
-void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) {
-    IUeGui::ICallMode& call = gui.setCallMode();
-    call.appendIncomingText(common::to_string(from) + ": " + text);
-}
-
-
 }
