@@ -230,5 +230,14 @@ void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) 
     call.appendIncomingText(common::to_string(from) + ": " + text);
 }
 
+void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
+    IUeGui::ITextMode& alert = gui.setAlertMode();
+    alert.setText(to_string(from) + " is busy");
+
+    gui.setRejectCallback([&] {
+        showConnected();
+    });
+}
+
 
 }
