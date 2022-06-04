@@ -29,9 +29,6 @@ public:
 
     void handleTimeout() final;
 
-    void handleCallReceiveText(common::PhoneNumber from, std::string &text) final;
-    void handleCallSendText(common::PhoneNumber to, const std::string& text) final;
-
 };
 
 }

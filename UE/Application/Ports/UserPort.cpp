@@ -161,8 +161,8 @@ void UserPort::showDial()
         handler->handleSendCallRequest(to);
 
         gui.setRejectCallback([&, to]() {
+            logger.logInfo(to);
             handler->handleSendCallDrop(to);
-            showConnected();
         });
 
         gui.setAcceptCallback([] {});
@@ -187,7 +187,6 @@ void UserPort::showCallRequest(common::PhoneNumber from)
 
     gui.setRejectCallback([&, from] {
         handler->handleSendCallDrop(from);
-        showConnected();
     });
 }
 
@@ -204,12 +203,16 @@ void UserPort::showConversationMode(common::PhoneNumber from)
         updateTalkMessages(phoneNumber, text);
         handler->handleCallSendText(from, text);
         call.clearOutgoingText();
+
+        gui.setRejectCallback([&, from] {
+            handler->handleSendCallDrop(from);
+        });
+
     });
 }
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
 {
-
     IUeGui::ITextMode& alert = gui.setAlertMode();
     alert.setText("Unavailable.");
 
@@ -219,6 +222,7 @@ void UserPort::showUnknownRecipient(common::PhoneNumber)
 }
 
 void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
+
     IUeGui::ITextMode& alert = gui.setAlertMode();
     alert.setText(to_string(from) + " is busy");
 

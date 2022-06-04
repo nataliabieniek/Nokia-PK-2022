@@ -78,9 +78,9 @@ void ConnectedState::handleSendCallDrop(common::PhoneNumber to)
 
 void ConnectedState::handleCallDrop(common::PhoneNumber from)
 {
-    isTalking = false;
     context.timer.stopTimer();
     context.user.showConnected();
+    isTalking = false;
 }
 
 void ConnectedState::handleTimeout()
