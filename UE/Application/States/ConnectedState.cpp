@@ -100,7 +100,7 @@ void ConnectedState::handleCallSendText(common::PhoneNumber to, const std::strin
     context.timer.stopTimer();
     using namespace std::chrono_literals;
     context.timer.startTimer(120s);
-    logger.logInfo("Connected state: " + common::to_string(to) + " " + text);
+    logger.logDebug("Connected state: " + common::to_string(to) + " " + text);
     context.bts.sendCallTalk(to, text);
 }
 

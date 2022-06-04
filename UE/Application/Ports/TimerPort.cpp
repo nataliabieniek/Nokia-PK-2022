@@ -37,6 +37,7 @@ namespace ue
     {
         logger.logInfo("Stop timer");
         isRunning = false;
+        std::this_thread::sleep_for(2 * interval);
     }
 
     void TimerPort::processingTimeout(std::chrono::duration<double> sleepTime) {

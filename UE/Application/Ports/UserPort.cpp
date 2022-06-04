@@ -155,13 +155,12 @@ void UserPort::showDial()
 
     gui.setAcceptCallback([&]() {
         common::PhoneNumber to = dial.getPhoneNumber();
-        logger.logInfo(to);
+        logger.logDebug(to);
         IUeGui::ITextMode& calling = gui.setAlertMode();
         calling.setText("Calling " + to_string(to) + "...");
         handler->handleSendCallRequest(to);
 
         gui.setRejectCallback([&, to]() {
-            logger.logInfo(to);
             handler->handleSendCallDrop(to);
         });
 
@@ -181,7 +180,6 @@ void UserPort::showCallRequest(common::PhoneNumber from)
     gui.setAcceptCallback([&, from] {
 
         handler->handleSendCallAccept(from);
-        logger.logInfo(common::to_string(from));
         showConversationMode(from);
     });
 
@@ -195,7 +193,6 @@ void UserPort::showConversationMode(common::PhoneNumber from)
     IUeGui::ICallMode& call = gui.setCallMode();
     call.clearIncomingText();
     call.clearOutgoingText();
-    logger.logInfo(common::to_string(from));
 
     gui.setAcceptCallback([&, from] {
         logger.logInfo("Accept:" + common::to_string(from));
