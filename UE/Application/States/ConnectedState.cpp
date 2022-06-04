@@ -1,6 +1,5 @@
 #include "ConnectedState.hpp"
 #include "NotConnectedState.hpp"
-#include "ViewingSms.hpp"
 
 namespace ue
 {

@@ -22,7 +22,6 @@ public:
     virtual void handleCallAccept(common::PhoneNumber from) = 0;
     virtual void handleCallDrop(common::PhoneNumber to) = 0;
 
-//    virtual void handleCallSendText(common::PhoneNumber to, std::string &text) = 0;
     virtual void handleCallReceiveText(common::PhoneNumber from, std::string &text) = 0;
 };
 
