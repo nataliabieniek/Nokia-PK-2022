@@ -7,6 +7,7 @@ namespace ue
 
 class ConnectedState : public BaseState
 {
+    bool isTalking = false;
 public:
     ConnectedState(Context& context);
 
@@ -22,6 +23,11 @@ public:
     void handleSendCallAccept(common::PhoneNumber from) final;
     void handleSendCallDrop(common::PhoneNumber to) final;
     void handleCallDrop(common::PhoneNumber from) final;
+
+    void handleCallReceiveText(common::PhoneNumber from, std::string &text) final;
+    void handleCallSendText(common::PhoneNumber to, const std::string& text) final;
+
+    void handleTimeout() final;
 
 };
 

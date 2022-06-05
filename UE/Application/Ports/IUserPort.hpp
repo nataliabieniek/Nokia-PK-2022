@@ -1,5 +1,6 @@
 #pragma once
 #include "Messages/PhoneNumber.hpp"
+#include "IUeGui.hpp"
 
 
 namespace ue
@@ -8,7 +9,6 @@ namespace ue
 class IUserEventsHandler
 {
 public:
-//    virtual void handleShowSmsList() = 0;
     virtual ~IUserEventsHandler() = default;
     virtual void handleSendSms(common::PhoneNumber to, const std::string& message) = 0;
 
@@ -16,6 +16,8 @@ public:
 
     virtual void handleSendCallAccept(common::PhoneNumber from) = 0;
     virtual void handleSendCallDrop(common::PhoneNumber from) = 0;
+
+    virtual void handleCallSendText(common::PhoneNumber to, const std::string& text) = 0;
 };
 
 class IUserPort
@@ -32,10 +34,15 @@ public:
     virtual void checkUnread() = 0;
 
     virtual void showDial() = 0;
+//    virtual void showDialCalling(IUeGui::IDialMode dial) = 0;
     virtual void showCallRequest(common::PhoneNumber from) = 0;
     virtual void showConversationMode(common::PhoneNumber from) = 0;
 
     virtual void showUnknownRecipient(common::PhoneNumber from) = 0;
+
+    virtual void showUnavailableRecipient(common::PhoneNumber &from) = 0;
+
+    virtual void updateTalkMessages(common::PhoneNumber &from, std::string &text) = 0;
 };
 
 }

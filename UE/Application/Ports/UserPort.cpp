@@ -155,15 +155,16 @@ void UserPort::showDial()
 
     gui.setAcceptCallback([&]() {
         common::PhoneNumber to = dial.getPhoneNumber();
-        logger.logInfo(to);
+        logger.logDebug(to);
         IUeGui::ITextMode& calling = gui.setAlertMode();
         calling.setText("Calling " + to_string(to) + "...");
         handler->handleSendCallRequest(to);
 
         gui.setRejectCallback([&, to]() {
             handler->handleSendCallDrop(to);
-            showConnected();
         });
+
+        gui.setAcceptCallback([] {});
     });
     gui.setRejectCallback([&] {
         showConnected();
@@ -179,13 +180,11 @@ void UserPort::showCallRequest(common::PhoneNumber from)
     gui.setAcceptCallback([&, from] {
 
         handler->handleSendCallAccept(from);
-        logger.logInfo(common::to_string(from));
         showConversationMode(from);
     });
 
     gui.setRejectCallback([&, from] {
         handler->handleSendCallDrop(from);
-        showConnected();
     });
 }
 
@@ -194,6 +193,19 @@ void UserPort::showConversationMode(common::PhoneNumber from)
     IUeGui::ICallMode& call = gui.setCallMode();
     call.clearIncomingText();
     call.clearOutgoingText();
+
+    gui.setAcceptCallback([&, from] {
+        logger.logInfo("Accept:" + common::to_string(from));
+        auto text = call.getOutgoingText();
+        updateTalkMessages(phoneNumber, text);
+        handler->handleCallSendText(from, text);
+        call.clearOutgoingText();
+
+        gui.setRejectCallback([&, from] {
+            handler->handleSendCallDrop(from);
+        });
+
+    });
 }
 
 void UserPort::showUnknownRecipient(common::PhoneNumber)
@@ -204,9 +216,20 @@ void UserPort::showUnknownRecipient(common::PhoneNumber)
     gui.setRejectCallback([&] {
         showConnected();
     });
-
-
 }
 
+void UserPort::showUnavailableRecipient(common::PhoneNumber &from) {
 
+    IUeGui::ITextMode& alert = gui.setAlertMode();
+    alert.setText(to_string(from) + " is busy");
+
+    gui.setRejectCallback([&] {
+        showConnected();
+    });
+}
+
+void UserPort::updateTalkMessages(common::PhoneNumber &from, std::string &text) {
+    IUeGui::ICallMode& call = gui.setCallMode();
+    call.appendIncomingText(common::to_string(from) + ": " + text);
+}
 }

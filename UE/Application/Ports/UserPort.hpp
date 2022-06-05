@@ -30,6 +30,9 @@ public:
 
     void showUnknownRecipient(common::PhoneNumber from) override;
 
+    void showUnavailableRecipient(common::PhoneNumber &from) override;
+    void updateTalkMessages(common::PhoneNumber &from, std::string &text) override;
+
 
 private:
     common::PrefixedLogger logger;
@@ -38,7 +41,6 @@ private:
     SmsDb& smsDB;
     IUserEventsHandler* handler = nullptr;
 
-    void showSmsList();
 };
 
 }

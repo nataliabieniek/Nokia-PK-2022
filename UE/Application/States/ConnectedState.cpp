@@ -1,6 +1,5 @@
 #include "ConnectedState.hpp"
 #include "NotConnectedState.hpp"
-#include "ViewingSms.hpp"
 
 namespace ue
 {
@@ -32,20 +31,26 @@ void ConnectedState::handleSendSms(common::PhoneNumber to, const std::string& me
 
 void ConnectedState::handleUnknownRecipient(common::PhoneNumber from)
 {
-    //context.smsDB.setUnknownRecipient();
+    isTalking = false;
     context.user.showUnknownRecipient(from);
 }
 
 void ConnectedState::handleCallRequest(common::PhoneNumber from)
 {
+    if(isTalking) {
+        context.bts.sendCallDrop(from);
+        return;
+    }
     using namespace std::chrono_literals;
     context.timer.startTimer(30000ms);
+    isTalking = true;
     context.user.showCallRequest(from);
 }
 
 void ConnectedState::handleSendCallRequest(common::PhoneNumber to) {
     using namespace std::chrono_literals;
-    context.timer.startTimer(60s);
+    context.timer.startTimer(30000ms);
+    isTalking = true;
     context.bts.sendCallRequest(to);
 }
 
@@ -64,6 +69,8 @@ void ConnectedState::handleSendCallAccept(common::PhoneNumber from)
 
 void ConnectedState::handleSendCallDrop(common::PhoneNumber to)
 {
+    isTalking = false;
+    context.user.showConnected();
     context.timer.stopTimer();
     context.bts.sendCallDrop(to);
 }
@@ -72,8 +79,29 @@ void ConnectedState::handleCallDrop(common::PhoneNumber from)
 {
     context.timer.stopTimer();
     context.user.showConnected();
+    isTalking = false;
 }
 
+void ConnectedState::handleTimeout()
+{
+    isTalking = false;
+    context.user.showConnected();
+}
+
+void ConnectedState::handleCallReceiveText(common::PhoneNumber from, std::string &text) {
+    context.timer.stopTimer();
+    using namespace std::chrono_literals;
+    context.timer.startTimer(120s);
+    context.user.updateTalkMessages(from, text);
+}
+
+void ConnectedState::handleCallSendText(common::PhoneNumber to, const std::string& text) {
+    context.timer.stopTimer();
+    using namespace std::chrono_literals;
+    context.timer.startTimer(120s);
+    logger.logDebug("Connected state: " + common::to_string(to) + " " + text);
+    context.bts.sendCallTalk(to, text);
+}
 
 
 }

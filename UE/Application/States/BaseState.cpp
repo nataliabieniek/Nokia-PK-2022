@@ -83,4 +83,12 @@ void BaseState::handleCallDrop(common::PhoneNumber from)
     logger.logError("Uexpected: handleCallDrop");
 }
 
+void BaseState::handleCallReceiveText(common::PhoneNumber from, std::string &text) {
+    logger.logError("Uexpected: handleCallReceiveText");
+}
+
+void BaseState::handleCallSendText(common::PhoneNumber to, const std::string& text) {
+    logger.logError("Uexpected: handleCallSendText");
+}
+
 }
