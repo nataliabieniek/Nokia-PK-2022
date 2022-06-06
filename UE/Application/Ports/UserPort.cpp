@@ -94,6 +94,7 @@ void UserPort::setSmsListView()
     if(smsList.empty()){
         IUeGui::ITextMode& emptyList = gui.setViewTextMode();
         emptyList.setText("No one like you :'( \n It's empty.");
+        gui.setAcceptCallback([&]() {});
     } else {
         for(auto sms: smsList) {
             if(sms.isUnknownRecipient()) {
